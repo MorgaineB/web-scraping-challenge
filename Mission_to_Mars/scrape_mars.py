@@ -37,7 +37,8 @@ def scrape():
     #Use Splinter to find the Image URL for the current Featured Mars Image
     image_url = soup.find('img', class_='headerimage fade-in')['src']
     featured_image_url = f'{jpl_url}{image_url}'
-    print(featured_image_url)
+   
+    mars_info['featured_image_url'] = featured_image_url
 
     #Set up for Mars Facts Scraping
     facts_url = 'https://galaxyfacts-mars.com/'
@@ -60,7 +61,8 @@ def scrape():
     #Convert the formated DataFrame to a HTML table string
     mars_facts_html_table = mars_facts_table.to_html(classes = 'table table-striped')
     mars_facts_html_table = mars_facts_html_table.replace('\n', ' ')
-    print(mars_facts_html_table)
+
+    mars_info['mars_facts_html_table'] = mars_facts_html_table
 
     #Scrape Cerberus Hemisphere
     hemispheres_url = 'https://marshemispheres.com/'
@@ -72,8 +74,6 @@ def scrape():
     hemisphere1_title = soup.find('h2', class_='title').text
     hemisphere1_img = soup.find('img', class_='wide-image')['src']
     hemisphere1_img_url = f'{hemispheres_url}{hemisphere1_img}'
-    print(hemisphere1_title)
-    print(hemisphere1_img_url)
 
     #Scrape Schiaparelli Hemisphere
     hemispheres_url = 'https://marshemispheres.com/'
@@ -85,8 +85,6 @@ def scrape():
     hemisphere2_title = soup.find('h2', class_='title').text
     hemisphere2_img = soup.find('img', class_='wide-image')['src']
     hemisphere2_img_url = f'{hemispheres_url}{hemisphere2_img}'
-    print(hemisphere2_title)
-    print(hemisphere2_img_url)
 
     #Scrape Syrtis Major Hemisphere
     hemispheres_url = 'https://marshemispheres.com/'
@@ -98,8 +96,6 @@ def scrape():
     hemisphere3_title = soup.find('h2', class_='title').text
     hemisphere3_img = soup.find('img', class_='wide-image')['src']
     hemisphere3_img_url = f'{hemispheres_url}{hemisphere3_img}'
-    print(hemisphere3_title)
-    print(hemisphere3_img_url)
 
     #Scrape Syrtis Major Hemisphere
     hemispheres_url = 'https://marshemispheres.com/'
@@ -111,8 +107,6 @@ def scrape():
     hemisphere4_title = soup.find('h2', class_='title').text
     hemisphere4_img = soup.find('img', class_='wide-image')['src']
     hemisphere4_img_url = f'{hemispheres_url}{hemisphere4_img}'
-    print(hemisphere4_title)
-    print(hemisphere4_img_url)
 
     #Create a Dictionary of the Hemisphere Titles & Images
     hemisphere_image_urls = [
@@ -123,7 +117,11 @@ def scrape():
 
     hemisphere_image_urls
 
+    mars_info['hemisphere_iamges'] = hemisphere_image_urls
+
     browser.quit()
+
+    return mars_info
 
 
 
