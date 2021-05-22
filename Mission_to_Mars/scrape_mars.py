@@ -7,7 +7,7 @@ from splinter import Browser
 from webdriver_manager.chrome import ChromeDriverManager
 
 def scrape():
-        executable_path = ChromeDriverManager().install()
+    executable_path = ChromeDriverManager().install()
     browser = Browser('chrome', executable_path=executable_path, headless=True)
 
     mars_info = {}

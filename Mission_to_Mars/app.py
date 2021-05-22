@@ -10,16 +10,15 @@ db = mongo.db
 @app.route("/")
 def home():
 
-    mars_info = mongo.db.mars_info.find_one()
-
+    mars_info = db.mars_info.find_one()
+    app.logger.info(mars_info)
     return render_template("index.html", mars_info=mars_info)
 
 @app.route("/scrape")
-def scrape():
-
-    new_mars_info = scrape_mars.scrape()
-
-    mongo.db.mars.update({}, new_mars_info, upsert=True)
+def mars():
+    mars_info = scrape_mars.scrape()
+    app.logger.info(mars_info)
+    db.mars_info.update({}, mars_info, upsert=True)
 
     return redirect("/", code=302)
 
